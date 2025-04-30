@@ -83,10 +83,8 @@ function App() {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 }); // Track the offset for panning
   const [usedCoords, setUsedCoords] = useState(new Set());
-  const [showModal, setShowModal] = useState(false);
+const [showMessage, setShowMessage] = useState(false);
   const canvasRef = useRef(null);
-
-  const message = `Thanks for voting! 🎉\nYour vote has been counted.`;
 
   const handleChange = (name) => {
     const alreadySelected = selected.includes(name);
@@ -242,8 +240,8 @@ function App() {
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
 
-       <button 
-        onClick={() => setShowModal(true)} 
+        <button 
+        onClick={() => setShowMessage(true)} 
         style={{ 
           position: 'absolute', 
           top: 10, 
@@ -257,37 +255,11 @@ function App() {
         🌼 Vote
       </button>
 
-      {showModal && (
-        <div style={{
-          position: 'fixed',
-          top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 9999
-        }}>
-          <div style={{
-            position: 'relative',
-            background: '#fff',
-            padding: '20px',
-            borderRadius: '8px',
-            maxWidth: '80%',
-            maxHeight: '80%',
-            overflowY: 'auto',
-            whiteSpace: 'pre-wrap'
-          }}>
-            <button onClick={() => setShowModal(false)} style={{
-              position: 'absolute',
-              top: 10,
-              right: 10,
-              background: 'transparent',
-              border: 'none',
-              fontSize: '20px',
-              cursor: 'pointer'
-            }}>✖</button>
-            {message}
-          </div>
+      {showMessage && (
+        <div style={{ marginTop: '60px', textAlign: 'center', whiteSpace: 'pre-wrap' }}>
+          Thanks for voting! 🎉
+          {'\n'}Your vote has been counted.
+        </div>
 
       <div className="senator-list">
         {senators.map((senator, i) => (
