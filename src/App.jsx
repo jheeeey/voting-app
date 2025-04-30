@@ -83,7 +83,6 @@ function App() {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 }); // Track the offset for panning
   const [usedCoords, setUsedCoords] = useState(new Set());
-const [showMessage, setShowMessage] = useState(false);
   const canvasRef = useRef(null);
 
   const handleChange = (name) => {
@@ -240,27 +239,11 @@ const [showMessage, setShowMessage] = useState(false);
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
 
-        <button 
-        onClick={() => setShowMessage(true)} 
-        style={{ 
-          position: 'absolute', 
-          top: 10, 
-          right: 10, 
-          fontSize: '18px', 
-          border: 'none', 
-          background: 'transparent', 
-          cursor: 'pointer' 
-        }}
-      >
-        🌼 Vote
-      </button>
-
-      {showMessage && (
-        <div style={{ marginTop: '60px', textAlign: 'center', whiteSpace: 'pre-wrap' }}>
-          Thanks for voting! 🎉
-          {'\n'}Your vote has been counted.
-        </div>
-
+       <div style={{ position: 'fixed', top: '10px', right: '10px', zIndex: 1000 }}>
+  <button style={{ fontSize: '18px', border: 'none', background: 'transparent', cursor: 'pointer' }}>
+    🌼 Vote
+  </button>
+</div>
       <div className="senator-list">
         {senators.map((senator, i) => (
           <label key={i} className="senator-item">
