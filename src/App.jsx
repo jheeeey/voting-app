@@ -239,9 +239,11 @@ function App() {
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
 <div style={{ position: 'fixed', top: '10px', right: '10px', zIndex: 1000 }}>
-  <button style={{ fontSize: '18px', border: 'none', background: 'transparent', cursor: 'pointer' }}>
-    🌼 Vote
-  </button>
+  <a href="/message.txt" target="_blank" rel="noopener noreferrer">
+    <button style={{ fontSize: '18px', border: 'none', background: 'transparent', cursor: 'pointer' }}>
+      🌼 Vote
+    </button>
+  </a>
 </div>
 
                                                                           
