@@ -87,6 +87,13 @@ function App() {
   const [usedCoords, setUsedCoords] = useState(new Set());
   const canvasRef = useRef(null);
 
+// Function to get user's IP
+async function getUserIP() {
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+    return data.ip;
+}
+
   const handleChange = (name) => {
     const alreadySelected = selected.includes(name);
     if (alreadySelected) {
@@ -158,14 +165,6 @@ function App() {
     setSelected([]); // Clear selection after voting
   };
   
-  // Function to get user's IP
-  async function getUserIP() {
-    const res = await fetch("https://api.ipify.org?format=json");
-    const data = await res.json();
-    return data.ip;
-  }
-  
-
   const handleZoomIn = () => {
     setZoomLevel(zoomLevel * 1.1); // Zoom in by 10%
   };
