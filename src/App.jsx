@@ -75,11 +75,6 @@ const senators = [
   { name: "VILLAR, CAMILLE (NP)", color: "#b262ea", link: "https://example.com/camille" }
 ];
 
-export default function VoteButton() {
-  const [showModal, setShowModal] = useState(false);
-
-  const message = `Thanks for voting! 🎉\nYour vote has been counted.`;
-
 function App() {
   const [selected, setSelected] = useState([]);
   const [pixels, setPixels] = useState([]); // Store all placed pixels
@@ -88,7 +83,10 @@ function App() {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 }); // Track the offset for panning
   const [usedCoords, setUsedCoords] = useState(new Set());
+  const [showModal, setShowModal] = useState(false);
   const canvasRef = useRef(null);
+
+  const message = `Thanks for voting! 🎉\nYour vote has been counted.`;
 
   const handleChange = (name) => {
     const alreadySelected = selected.includes(name);
@@ -243,7 +241,8 @@ function App() {
     <div className="app">
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
-      <button 
+
+       <button 
         onClick={() => setShowModal(true)} 
         style={{ 
           position: 'absolute', 
@@ -255,7 +254,7 @@ function App() {
           cursor: 'pointer' 
         }}
       >
-        🌼
+        🌼 Vote
       </button>
 
       {showModal && (
@@ -289,7 +288,6 @@ function App() {
             }}>✖</button>
             {message}
           </div>
-
 
       <div className="senator-list">
         {senators.map((senator, i) => (
