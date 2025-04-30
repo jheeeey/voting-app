@@ -87,13 +87,6 @@ function App() {
   const [usedCoords, setUsedCoords] = useState(new Set());
   const canvasRef = useRef(null);
 
-// Function to get user's IP
-async function getUserIP() {
-    const res = await fetch("https://api.ipify.org?format=json");
-    const data = await res.json();
-    return data.ip;
-}
-
   const handleChange = (name) => {
     const alreadySelected = selected.includes(name);
     if (alreadySelected) {
@@ -106,27 +99,6 @@ async function getUserIP() {
   const handleVote = async () => {
     const newPixels = [];
     const newCoords = new Set();
-    
-    // Step 1: Get the user's IP address
-    const ip = await getUserIP();
-  
-    // Step 2: Check if the user has already voted using the IP address
-    const { data: existingVote, error: checkError } = await supabase
-      .from('votes')
-      .select('id')
-      .eq('ip_address', ip)
-      .single();
-  
-    if (checkError) {
-      console.error('Error checking vote existence:', checkError.message);
-      return;
-    }
-  
-    // Step 3: If the user has already voted, prevent the submission
-    if (existingVote) {
-      alert('You have already voted!');
-      return;
-    }
   
     // Step 4: Loop through the selected senators
     selected.forEach((senatorName) => {
@@ -149,7 +121,6 @@ async function getUserIP() {
     const { data, error } = await supabase.from("votes").insert(
       newPixels.map(pixel => ({
         ...pixel,
-        ip_address: ip, // Store the user's IP address along with the vote
       }))
     );
   
