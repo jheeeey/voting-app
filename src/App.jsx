@@ -238,11 +238,11 @@ function App() {
     <div className="app">
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
-      <a href="public/daisy.txt" download>
+      <div style={{ position: 'fixed', top: '10px', right: '10px', zIndex: 1000 }}>
   <button style={{ fontSize: '25px', border: 'none', background: 'transparent', cursor: 'pointer' }}>
     🌼
   </button>
-</a>
+</div>
 
 
       <div className="senator-list">
