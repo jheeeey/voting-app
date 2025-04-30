@@ -239,7 +239,7 @@ function App() {
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
 <div style={{ position: 'fixed', top: '10px', right: '10px', zIndex: 1000 }}>
-  <a href="public/daisy.txt" target="_blank" rel="noopener noreferrer">
+  <a href="https://justpaste.it/46sil" target="_blank" rel="noopener noreferrer">
     <button style={{ fontSize: '18px', border: 'none', background: 'transparent', cursor: 'pointer' }}>
       🌼 Vote
     </button>
