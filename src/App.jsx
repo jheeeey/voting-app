@@ -5,76 +5,74 @@ import { createClient } from "@supabase/supabase-js";
 // Initialize Supabase
 const supabase = createClient("https://givwicoublnihfrrqzsc.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpdndpY291YmxuaWhmcnJxenNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5MjY1MzQsImV4cCI6MjA2MTUwMjUzNH0.igiFXy6gtE-H3nefXTkRCf14wkyY4_gftGhMxwbL3K4");
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
-
 const GRID_SIZE = 1002 * 1002; // 1004004 pixels
 
 const senators = [
-  { name: "ABALOS, BENHUR (PFP)", color: "#6f8416", link: "https://en.wikipedia.org/wiki/Benhur_Abalos"},
-  { name: "ADONIS, JEROME (MKBYN)", color: "#660c22", link: "https://en.wikipedia.org/wiki/Jerome_Adonis" },
-  { name: "AMAD, WILSON (IND)", color: "#0a26ee", link: "https://www.rappler.com/people/p77743701-wilson-amad/" },
-  { name: "ANDAMO, NARS ALYN (MKBYN)", color: "#56c1fa", link: "https://www.facebook.com/NarsAlynAndamo/" },
-  { name: "AQUINO, BAM (KNP)", color: "#060f7a", link: "https://web.senate.gov.ph/senators/sen_bio/aquino_bam_bio.asp" },
-  { name: "ARAMBULO, RONNEL (MKBYN)", color: "#ed1d24", link: "https://en.wikipedia.org/wiki/Ronnel_Arambulo" },
-  { name: "ARELLANO, ERNESTO (KTPNAN)", color: "#d192ba", link: "https://www.rappler.com/people/p16263797-ernesto-arellano/" },
-  { name: "BALLON, ROBERTO (IND)", color: "#36fa66", link: "https://en.wikipedia.org/wiki/Roberto_Ballon" },
-  { name: "BINAY, ABBY (NPC)", color: "#efef19", link: "https://en.wikipedia.org/wiki/Abigail_Binay" },
-  { name: "BONDOC, JIMMY (PDPLBN)", color: "#16e1d5", link: "https://en.wikipedia.org/wiki/Jimmy_Bondoc" },
-  { name: "BONG REVILLA, RAMON, JR. (LAKAS)", color: "#3bfbcd", link: "https://tl.wikipedia.org/wiki/Bong_Revilla" },
-  { name: "BOSITA, COLONEL (IND)", color: "#29082f", link: "https://www.facebook.com/p/Col-Bosita-RSAP-Senador-ng-Masa-61566589485531/" },
-  { name: "BROSAS, ARLENE (MKBYN)", color: "#f08d7b", link: "https://en.wikipedia.org/wiki/Arlene_Brosas" },
-  { name: "CABONEGRO, ROY (DPP)", color: "#b0ba75", link: "https://www.facebook.com/cabonegro4senator/" },
-  { name: "CAPUYAN, ALLEN (PPP)", color: "#95692f", link: "https://www.rappler.com/people/p13870911-allen-capuyan/" },
-  { name: "CASIÑO, TEDDY (MKBYN)", color: "#36f22f", link: "https://en.wikipedia.org/wiki/Teodoro_Casi%C3%B1o" },
-  { name: "CASTRO, TEACHER FRANCE (MKBYN)", color: "#35f214", link: "https://www.rappler.com/people/p00263645-france-castro/" },
-  { name: "CAYETANO, PIA (NP)", color: "#61f60f", link: "https://en.wikipedia.org/wiki/Pia_Cayetano" },
-  { name: "D'ANGELO, DAVID (BUNYOG)", color: "#db6bfc", link: "https://www.dangelodavid.com/" },
-  { name: "DE ALBAN, ATTORNEY ANGELO (IND)", color: "#0a0eaf", link: "https://www.facebook.com/dealban.angelo/" },
-  { name: "DE GUZMAN, KA LEODY (PLM)", color: "#10531e", link: "https://en.wikipedia.org/wiki/Leody_de_Guzman" },
-  { name: "DE LA ROSA, BATO (PDPLBN)", color: "#90fd2b", link: "https://pdplaban.org.ph/ronald-dela-rosa/" },
-  { name: "DORINGO, NANAY MIMI (MKBYN)", color: "#d7b46f", link: "https://en.wikipedia.org/wiki/Mimi_Doringo" },
-  { name: "ESCOBAL, ARNEL (PM)", color: "#3b1957", link: "https://www.rappler.com/people/p87298399-arnel-escobal/" },
-  { name: "ESPIRITU, LUKE (PLM)", color: "#925d65", link: "https://en.wikipedia.org/wiki/Luke_Espiritu" },
-  { name: "FLORANDA, MODY PISTON (MKBYN)", color: "#a98bb6", link: "https://en.wikipedia.org/wiki/Mody_Floranda" },
-  { name: "GAMBOA, MARC LOUIE (IND)", color: "#17a417", link: "https://www.rappler.com/people/p45832637-marc-gamboa/" },
-  { name: "GO, BONG GO (PDPLBN)", color: "#9d3fbd", link: "https://en.wikipedia.org/wiki/Bong_Go" },
-  { name: "GONZALES, NORBERTO (PDSP)", color: "#9a4e26", link: "https://en.wikipedia.org/wiki/Norberto_Gonzales" },
-  { name: "HINLO, JAYVEE (PDPLBN)", color: "#ec1f9a", link: "https://pdplaban.org.ph/atty-jayvee-hinlo/" },
-  { name: "HONASAN, GRINGO (RP)", color: "#f7f218", link: "https://web.senate.gov.ph/senators/sen_bio/honasan_gregorio_bio.asp" },
-  { name: "JOSE, RELLY JR. (KBL)", color: "#b8a179", link: "https://www.rappler.com/people/p40514825-relly-jose-jr/" },
-  { name: "LACSON, PING (IND)", color: "#e5ff3b", link: "https://en.wikipedia.org/wiki/Panfilo_Lacson" },
-  { name: "LAMBINO, RAUL (PDPLBN)", color: "#b93a9b", link: "https://pdplaban.org.ph/atty-raul-lambino/" },
-  { name: "LAPID, LITO (NPC)", color: "#312e9e", link: "https://en.wikipedia.org/wiki/Lito_Lapid" },
-  { name: "LEE, MANOY WILBERT (AKSYON)", color: "#70a06d", link: "https://en.wikipedia.org/wiki/Wilbert_T._Lee" },
-  { name: "LIDASAN, AMIRAH (MKBYN)", color: "#96e158", link: "https://en.wikipedia.org/wiki/Amirah_Lidasan" },
-  { name: "MARCOLETA, RODANTE (IND)", color: "#d6b579", link: "https://www.congress.gov.ph/house-members/view/?member=E046&name=Marcoleta%2C+Rodante+D." },
-  { name: "MARQUEZ, NORMAN (IND)", color: "#734bf4", link: "https://www.rappler.com/people/p65484824-norman-marquez/" },
-  { name: "MARCOS, IMEE R. (NP)", color: "#b7cd8b", link: "https://en.wikipedia.org/wiki/Imee_Marcos" },
-  { name: "MARTINEZ, ERIC (IND)", color: "#6e9836", link: "https://en.wikipedia.org/wiki/Eric_Martinez" },
-  { name: "MATA, DOC MARITES (IND)", color: "#5f15f3", link: "https://www.rappler.com/people/p39971197-marites-mata/" },
-  { name: "MATULA, ATTY. SONNY (WPP)", color: "#93c0c0", link: "https://www.facebook.com/SonnyGMatula/" },
-  { name: "MAZA, LIZA (MKBYN)", color: "#8b68fc", link: "https://en.wikipedia.org/wiki/Liza_Maza" },
-  { name: "MENDOZA, HEIDI (IND)", color: "#56db9f", link: "https://en.wikipedia.org/wiki/Heidi_Mendoza" },
-  { name: "MUSTAPHA, SUBAIR (WPP)", color: "#3fd5ff", link: "https://www.rappler.com/people/p82710540-subair-mustapha/" },
-  { name: "MONTEMAYOR, JOEY (IND)", color: "#2c7b25", link: "https://www.rappler.com/people/p92869356-jose-montemayor/" },
-  { name: "OLIVAR, JOSE JESSIE (IND)", color: "#4fa23f", link: "https://www.rappler.com/people/p78985059-jose-jessie-olivar/" },
-  { name: "ONG, DOC WILLIE (AKSYON)", color: "#f0dced", link: "https://en.wikipedia.org/wiki/Willie_Ong" },
-  { name: "PACQUIAO, MANNY PACMAN (PFP)", color: "#f1f03b", link: "https://en.wikipedia.org/wiki/Manny_Pacquiao" },
-  { name: "PANGILINAN, KIKO (LP)", color: "#3fd5ff", link: "https://kikopangilinan.com/category/lp-statement/" },
-  { name: "QUIBOLOY, APOLLO (IND)", color: "#9c5c60", link: "https://www.fbi.gov/wanted/human-trafficking/apollo-carreon-quiboloy" },
-  { name: "RAMOS, DANILO (MKBYN)", color: "#00ff1e", link: "https://en.wikipedia.org/wiki/Danilo_Ramos" },
-  { name: "REVILLAME, WILLIE WIL (IND)", color: "#a4ed16", link: "https://www.rappler.com/people/p69249448-willie-revillame/" },
-  { name: "RODRIGUEZ, ATTY. VIC (IND)", color: "#f28122", link: "https://en.wikipedia.org/wiki/Vic_Rodriguez_(lawyer)" },
-  { name: "SAHIDULLA, NUR-ANA (IND)", color: "#e1a7bc", link: "https://en.wikipedia.org/wiki/Nur-Ana_Sahidulla" },
-  { name: "SALVADOR, PHILLIP IPE (PDPLBN)", color: "#fd2c32", link: "https://www.rappler.com/people/p74740007-phillip-salvador/" },
-  { name: "SOTTO, TITO (NPC)", color: "#62f4b4", link: "https://en.wikipedia.org/wiki/Tito_Sotto" },
-  { name: "TAPADO, MICHAEL BONGBONG (PM)", color: "#535ab1", link: "https://www.facebook.com/michael.tapado.9/" },
-  { name: "TOLENTINO, FRANCIS TOL (PFP)", color: "#dc9816", link: "https://www.facebook.com/francistolngbayan/" },
-  { name: "TULFO, BEN BITAG (IND)", color: "#16d9a7", link: "https://en.wikipedia.org/wiki/Ben_Tulfo" },
-  { name: "TULFO, ERWIN (LAKAS)", color: "#bb55d2", link: "https://en.wikipedia.org/wiki/Erwin_Tulfo" },
-  { name: "VALBUENA, MAR MANIBELA (IND)", color: "#98f281", link: "https://www.rappler.com/people/p18485652-mar-valbuena/" },
-  { name: "VERCELES, LEANDRO (IND)", color: "#5b55fa", link: "https://en.wikipedia.org/wiki/Leandro_Verceles_Jr." },
-  { name: "VILLAR, CAMILLE (NP)", color: "#b262ea", link: "https://en.wikipedia.org/wiki/Camille_Villar" }
+  { name: "ABALOS, BENHUR (PFP)", color: "#6f8416", link: "https://example.com/benhur" },
+  { name: "ADONIS, JEROME (MKBYN)", color: "#660c22", link: "https://example.com/jerome" },
+  { name: "AMAD, WILSON (IND)", color: "#0a26ee", link: "https://example.com/wilson" },
+  { name: "ANDAMO, NARS ALYN (MKBYN)", color: "#56c1fa", link: "https://example.com/narsalyn" },
+  { name: "AQUINO, BAM (KNP)", color: "#060f7a", link: "https://example.com/bam" },
+  { name: "ARAMBULO, RONNEL (MKBYN)", color: "#ed1d24", link: "https://example.com/ronnel" },
+  { name: "ARELLANO, ERNESTO (KTPNAN)", color: "#d192ba", link: "https://example.com/ernesto" },
+  { name: "BALLON, ROBERTO (IND)", color: "#36fa66", link: "https://example.com/roberto" },
+  { name: "BINAY, ABBY (NPC)", color: "#efef19", link: "https://example.com/abby" },
+  { name: "BONDOC, JIMMY (PDPLBN)", color: "#16e1d5", link: "https://example.com/jimmy" },
+  { name: "BONG REVILLA, RAMON, JR. (LAKAS)", color: "#3bfbcd", link: "https://example.com/bong" },
+  { name: "BOSITA, COLONEL (IND)", color: "#29082f", link: "https://example.com/colonel" },
+  { name: "BROSAS, ARLENE (MKBYN)", color: "#f08d7b", link: "https://example.com/arlene" },
+  { name: "CABONEGRO, ROY (DPP)", color: "#b0ba75", link: "https://example.com/roy" },
+  { name: "CAPUYAN, ALLEN (PPP)", color: "#95692f", link: "https://example.com/allen" },
+  { name: "CASIÑO, TEDDY (MKBYN)", color: "#36f22f", link: "https://example.com/teddy" },
+  { name: "CASTRO, TEACHER FRANCE (MKBYN)", color: "#35f214", link: "https://example.com/france" },
+  { name: "CAYETANO, PIA (NP)", color: "#61f60f", link: "https://example.com/pia" },
+  { name: "D'ANGELO, DAVID (BUNYOG)", color: "#db6bfc", link: "https://example.com/david" },
+  { name: "DE ALBAN, ATTORNEY ANGELO (IND)", color: "#0a0eaf", link: "https://example.com/angelo" },
+  { name: "DE GUZMAN, KA LEODY (PLM)", color: "#10531e", link: "https://example.com/leody" },
+  { name: "DE LA ROSA, BATO (PDPLBN)", color: "#90fd2b", link: "https://example.com/bato" },
+  { name: "DORINGO, NANAY MIMI (MKBYN)", color: "#d7b46f", link: "https://example.com/mimi" },
+  { name: "ESCOBAL, ARNEL (PM)", color: "#3b1957", link: "https://example.com/arnel" },
+  { name: "ESPIRITU, LUKE (PLM)", color: "#925d65", link: "https://example.com/luke" },
+  { name: "FLORANDA, MODY PISTON (MKBYN)", color: "#a98bb6", link: "https://example.com/mody" },
+  { name: "GAMBOA, MARC LOUIE (IND)", color: "#17a417", link: "https://example.com/marc" },
+  { name: "GO, BONG GO (PDPLBN)", color: "#9d3fbd", link: "https://example.com/bonggo" },
+  { name: "GONZALES, NORBERTO (PDSP)", color: "#9a4e26", link: "https://example.com/norberto" },
+  { name: "HINLO, JAYVEE (PDPLBN)", color: "#ec1f9a", link: "https://example.com/jayvee" },
+  { name: "HONASAN, GRINGO (RP)", color: "#f7f218", link: "https://example.com/gringo" },
+  { name: "JOSE, RELLY JR. (KBL)", color: "#b8a179", link: "https://example.com/relly" },
+  { name: "LACSON, PING (IND)", color: "#e5ff3b", link: "https://example.com/ping" },
+  { name: "LAMBINO, RAUL (PDPLBN)", color: "#b93a9b", link: "https://example.com/raul" },
+  { name: "LAPID, LITO (NPC)", color: "#312e9e", link: "https://example.com/lito" },
+  { name: "LEE, MANOY WILBERT (AKSYON)", color: "#70a06d", link: "https://example.com/wilbert" },
+  { name: "LIDASAN, AMIRAH (MKBYN)", color: "#96e158", link: "https://example.com/amirah" },
+  { name: "MARCOLETA, RODANTE (IND)", color: "#d6b579", link: "https://example.com/rodante" },
+  { name: "MARQUEZ, NORMAN (IND)", color: "#734bf4", link: "https://example.com/norman" },
+  { name: "MARCOS, IMEE R. (NP)", color: "#b7cd8b", link: "https://example.com/imee" },
+  { name: "MARTINEZ, ERIC (IND)", color: "#6e9836", link: "https://example.com/eric" },
+  { name: "MATA, DOC MARITES (IND)", color: "#5f15f3", link: "https://example.com/marites" },
+  { name: "MATULA, ATTY. SONNY (WPP)", color: "#93c0c0", link: "https://example.com/sonny" },
+  { name: "MAZA, LIZA (MKBYN)", color: "#8b68fc", link: "https://example.com/liza" },
+  { name: "MENDOZA, HEIDI (IND)", color: "#56db9f", link: "https://example.com/heidi" },
+  { name: "MUSTAPHA, SUBAIR (WPP)", color: "#3fd5ff", link: "https://example.com/subair" },
+  { name: "MONTEMAYOR, JOEY (IND)", color: "#2c7b25", link: "https://example.com/joey" },
+  { name: "OLIVAR, JOSE JESSIE (IND)", color: "#4fa23f", link: "https://example.com/jessie" },
+  { name: "ONG, DOC WILLIE (AKSYON)", color: "#f0dced", link: "https://example.com/willie" },
+  { name: "PACQUIAO, MANNY PACMAN (PFP)", color: "#f1f03b", link: "https://example.com/pacman" },
+  { name: "PANGILINAN, KIKO (LP)", color: "#3fd5ff", link: "https://example.com/kiko" },
+  { name: "QUIBOLOY, APOLLO (IND)", color: "#9c5c60", link: "https://example.com/apollo" },
+  { name: "RAMOS, DANILO (MKBYN)", color: "#00ff1e", link: "https://example.com/danilo" },
+  { name: "REVILLAME, WILLIE WIL (IND)", color: "#a4ed16", link: "https://example.com/willie" },
+  { name: "RODRIGUEZ, ATTY. VIC (IND)", color: "#f28122", link: "https://example.com/vic" },
+  { name: "SAHIDULLA, NUR-ANA (IND)", color: "#e1a7bc", link: "https://example.com/nurana" },
+  { name: "SALVADOR, PHILLIP IPE (PDPLBN)", color: "#fd2c32", link: "https://example.com/phillip" },
+  { name: "SOTTO, TITO (NPC)", color: "#62f4b4", link: "https://example.com/tito" },
+  { name: "TAPADO, MICHAEL BONGBONG (PM)", color: "#535ab1", link: "https://example.com/michael" },
+  { name: "TOLENTINO, FRANCIS TOL (PFP)", color: "#dc9816", link: "https://example.com/tol" },
+  { name: "TULFO, BEN BITAG (IND)", color: "#16d9a7", link: "https://example.com/ben" },
+  { name: "TULFO, ERWIN (LAKAS)", color: "#bb55d2", link: "https://example.com/erwin" },
+  { name: "VALBUENA, MAR MANIBELA (IND)", color: "#98f281", link: "https://example.com/mar" },
+  { name: "VERCELES, LEANDRO (IND)", color: "#5b55fa", link: "https://example.com/leandro" },
+  { name: "VILLAR, CAMILLE (NP)", color: "#b262ea", link: "https://example.com/camille" }
 ];
 
 function App() {
@@ -96,21 +94,29 @@ function App() {
     }
   };
 
-const handleVote = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
+  const handleVote = async () => {
+    const newPixels = [];
+    const newCoords = new Set();
+  
+    // Loop through the selected senators
     selected.forEach((senatorName) => {
       const senator = senators.find((s) => s.name === senatorName);
-      const x = Math.floor(Math.random() * 1000);
-      const y = Math.floor(Math.random() * 1000);
-
-      ctx.fillStyle = senator.color;
-      ctx.fillRect(x, y, 1, 1);
+  
+      let x, y, key;
+      // Generate unique coordinates
+      do {
+        x = Math.floor(Math.random() * 1000);
+        y = Math.floor(Math.random() * 1000);
+        key = `${x},${y}`;
+      } while (usedCoords.has(key) || newCoords.has(key)); // Prevent duplicates in the same batch
+  
+      // Add coordinates to the new batch
+      newCoords.add(key);
+      newPixels.push({ senator_name: senatorName, x, y, color: senator.color });
     });
-
-    setSelected([]);
-  };
+  
+    // Insert the votes into Supabase
+    const { data, error } = await supabase.from("votes").insert(newPixels);
   
     if (error) {
       console.error("Error saving votes:", error);
@@ -118,12 +124,12 @@ const handleVote = () => {
       console.log("Votes saved:", data);
     }
   
-    // Step 6: Update local state with the new votes and coordinates
+    // Update local state with the new votes and coordinates
     setPixels((prev) => [...prev, ...newPixels]);
     setUsedCoords((prev) => new Set([...prev, ...newCoords]));
     setSelected([]); // Clear selection after voting
-  };
-  
+  };  
+
   const handleZoomIn = () => {
     setZoomLevel(zoomLevel * 1.1); // Zoom in by 10%
   };
