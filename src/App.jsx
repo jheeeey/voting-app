@@ -238,7 +238,9 @@ function App() {
     <div className="app">
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
-
+<button style={{ fontSize: '16px', padding: '8px 12px' }}>
+  🌼 Vote
+</button>
       <div className="senator-list">
         {senators.map((senator, i) => (
           <label key={i} className="senator-item">
