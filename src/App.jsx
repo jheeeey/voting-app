@@ -5,6 +5,8 @@ import { createClient } from "@supabase/supabase-js";
 // Initialize Supabase
 const supabase = createClient("https://givwicoublnihfrrqzsc.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpdndpY291YmxuaWhmcnJxenNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5MjY1MzQsImV4cCI6MjA2MTUwMjUzNH0.igiFXy6gtE-H3nefXTkRCf14wkyY4_gftGhMxwbL3K4");
 
+export const supabase = createClient(supabaseUrl, supabaseKey);
+
 const GRID_SIZE = 1002 * 1002; // 1004004 pixels
 
 const senators = [
