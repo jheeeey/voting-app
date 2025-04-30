@@ -238,8 +238,8 @@ function App() {
     <div className="app">
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
-      <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
-  <button style={{ fontSize: '18px',border: 'none', background: 'transparent' }}>🌼</button>
+      <div style={{ position: 'fixed', top: '10px', right: '10px' }}>
+  <button style={{ fontSize: '25px',border: 'none', background: 'transparent' }}>🌼</button>
 </div>
 
 
