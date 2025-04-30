@@ -75,6 +75,11 @@ const senators = [
   { name: "VILLAR, CAMILLE (NP)", color: "#b262ea", link: "https://example.com/camille" }
 ];
 
+export default function VoteButton() {
+  const [showModal, setShowModal] = useState(false);
+
+  const message = `Thanks for voting! 🎉\nYour vote has been counted.`;
+
 function App() {
   const [selected, setSelected] = useState([]);
   const [pixels, setPixels] = useState([]); // Store all placed pixels
@@ -238,11 +243,52 @@ function App() {
     <div className="app">
       <h1>Practice Your Right to Vote</h1>
       <p>Select exactly 12 senators. Each vote adds a pixel to the grid.</p>
-      <div style={{ position: 'fixed', top: '10px', right: '10px', zIndex: 1000 }}>
-  <button style={{ fontSize: '25px', border: 'none', background: 'transparent', cursor: 'pointer' }}>
-    🌼
-  </button>
-</div>
+      <button 
+        onClick={() => setShowModal(true)} 
+        style={{ 
+          position: 'absolute', 
+          top: 10, 
+          right: 10, 
+          fontSize: '18px', 
+          border: 'none', 
+          background: 'transparent', 
+          cursor: 'pointer' 
+        }}
+      >
+        🌼
+      </button>
+
+      {showModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999
+        }}>
+          <div style={{
+            position: 'relative',
+            background: '#fff',
+            padding: '20px',
+            borderRadius: '8px',
+            maxWidth: '80%',
+            maxHeight: '80%',
+            overflowY: 'auto',
+            whiteSpace: 'pre-wrap'
+          }}>
+            <button onClick={() => setShowModal(false)} style={{
+              position: 'absolute',
+              top: 10,
+              right: 10,
+              background: 'transparent',
+              border: 'none',
+              fontSize: '20px',
+              cursor: 'pointer'
+            }}>✖</button>
+            {message}
+          </div>
 
 
       <div className="senator-list">
