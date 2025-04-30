@@ -96,33 +96,21 @@ function App() {
     }
   };
 
-  const handleVote = async () => {
-    const newPixels = [];
-    const newCoords = new Set();
-  
-    // Step 4: Loop through the selected senators
+const handleVote = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
     selected.forEach((senatorName) => {
       const senator = senators.find((s) => s.name === senatorName);
-    
-      let x, y, key;
-      // Generate unique coordinates
-      do {
-        x = Math.floor(Math.random() * 1000);
-        y = Math.floor(Math.random() * 1000);
-        key = `${x},${y}`;
-      } while (usedCoords.has(key) || newCoords.has(key)); // Prevent duplicates in the same batch
-    
-      // Add coordinates to the new batch
-      newCoords.add(key);
-      newPixels.push({ senator_name: senatorName, x, y, color: senator.color });
+      const x = Math.floor(Math.random() * 1000);
+      const y = Math.floor(Math.random() * 1000);
+
+      ctx.fillStyle = senator.color;
+      ctx.fillRect(x, y, 1, 1);
     });
-  
-    // Step 5: Insert the votes into Supabase
-    const { data, error } = await supabase.from("votes").insert(
-      newPixels.map(pixel => ({
-        ...pixel,
-      }))
-    );
+
+    setSelected([]);
+  };
   
     if (error) {
       console.error("Error saving votes:", error);
