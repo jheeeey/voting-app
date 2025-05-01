@@ -241,7 +241,7 @@ function App() {
 <div style={{ position: 'fixed', top: '10px', right: '10px', zIndex: 1000 }}>
   <a href="/daisy.txt" target="_blank" rel="noopener noreferrer">
     <button style={{ fontSize: '18px', border: 'none', background: 'transparent', cursor: 'pointer' }}>
-      🌼 Vote
+      🌼
     </button>
   </a>
 </div>
